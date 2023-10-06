@@ -1,0 +1,40 @@
+<!-- Header Starts -->
+<nav class="header navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" [routerLink]="['/']" >
+            <div class="logo-container">
+                <img class="logo" src="../../assets/note.jpg" alt="Logo">
+            </div>
+            <h4>Save Note App</h4>
+        </a>
+
+        <button class="navbar-toggler collapsed" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+            [attr.aria-expanded]="!isNavbarCollapsed" aria-controls="navbarNav" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" [ngbCollapse]="isNavbarCollapsed">
+            <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn; else loggedOutContent">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/dashboard']"  routerLinkActive="active">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" (click)="logout()">Logout</button>
+                </li>
+            </ul>
+            <ng-template #loggedOutContent>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/login']"  routerLinkActive="active">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/register']"  routerLinkActive="active">Register</a>
+                    </li>
+                </ul>
+
+
+            </ng-template>
+        </div>
+    </div>
+</nav>
+<!-- Header End -->

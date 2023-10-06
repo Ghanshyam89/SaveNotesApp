@@ -1,0 +1,74 @@
+<app-header></app-header>
+
+<div class="container mt-2">
+    <a [routerLink]="['/dashboard']" class="text-dark card-link">&laquo; Back</a>
+</div>
+
+<div class="container text-center my-2">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h2>Add Note</h2>
+    </section>
+</div>
+
+<div class="container">
+    
+    <section class="hero-section d-flex justify-content-center">
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="border shadow-lg p-4 rounded">
+
+            <!-- Printing all the error! -->
+
+            <ngb-alert [dismissible]="false" *ngIf="error" class="error alert-danger">
+                <span><i class="fas fa-info-circle me-1 error"></i>{{errorMessage}}</span>
+            </ngb-alert>
+
+            <!-- Content -->
+            <ngb-alert [dismissible]="false" class="error alert-danger"
+                *ngIf="content.touched && content.hasError('content')">
+                <span><i class="fas fa-info-circle me-1"></i>The notes will only allow [@ , ; & * + -] special
+                    characters.</span>
+            </ngb-alert>
+
+
+            <h5 class="text-center my-3">Enter your content</h5>
+
+            <div class="row my-3">
+                <!-- Title -->
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="title" formControlName="title" class="form-control" />
+                        <span class="error" *ngIf="title.hasError('required') && title.touched">
+                            <i class="fas fa-info-circle me-1"></i>Title is required.</span>
+                    </div>
+                </div>
+                <!-- Content -->
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Content</label>
+                        <textarea rows="5" type="text" id="content" formControlName="content"
+                            class="form-control"></textarea>
+                        <span class="error" *ngIf="content.hasError('required') && content.touched">
+                            <i class="fas fa-info-circle me-1"></i>Content is required.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning mt-3 w-100">Add</button>
+            </div>
+
+            <div class="row mt-3 p-2">
+                <div class="col-sm-12 text-center">
+                    <p>Want to see previous notes? <a [routerLink]="['/dashboard']" class="text-white">click here</a>
+                    </p>
+                </div>
+            </div>
+        </form>
+
+    </section>
+</div>
+
+
+
+<router-outlet></router-outlet>

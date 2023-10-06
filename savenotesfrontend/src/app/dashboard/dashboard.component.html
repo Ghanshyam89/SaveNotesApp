@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-6">
+            <h3 class="section-title">Your Notes</h3>
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-dark" [routerLink]="['/add-note']">Add Note</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row" *ngIf="notes.length > 0; else noNotesBlock">
+        <div class="my-3" *ngFor="let note of notes">
+            <div class="note-card border rounded p-3">
+
+                <div class="row">
+                    <div class="col-10 d-flex flex-column flex-md-row align-items-start align-items-md-center">
+                        <h4 class="mb-md-0">{{ note.title }}</h4>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end">
+                        <img src="../../assets/trash.png" alt="delete" (click)="onButtonClick(note.id)"
+                            class="trash mt-1">
+                    </div>
+                </div>
+                <div class="note-description">
+                    <ng-container *ngIf="note.content.length > 200 && !note.showFullContent" class="text-justify">
+                        {{ note.content | slice:0:200 }}...
+                        <button (click)="toggleContent(note)" class="btn btn-link p-1 mb-1">read more</button>
+                    </ng-container>
+                    <ng-container *ngIf="note.showFullContent || note.content.length <= 200">
+                        {{ note.content }}
+                        <button *ngIf="note.showFullContent" (click)="toggleContent(note)"
+                            class="btn btn-link p-1 mb-1">read less</button>
+                    </ng-container>
+                </div>
+                <div class="note-footer">
+                    <p class="note-price">{{ note.timestamp | date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #noNotesBlock>
+        <div class="note-card p-3">
+            <p class="text-center mt-2">Currently, there are no notes to display. You can contribute by adding one. <a
+                    [routerLink]="['/add-note']">Click here</a> to get started.</p>
+        </div>
+    </ng-template>
+
+</div>

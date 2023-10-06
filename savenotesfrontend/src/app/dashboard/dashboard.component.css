@@ -1,0 +1,20 @@
+.note-card {
+    /* height: 370px; */
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+    text-align: justify;
+}
+
+.note-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.note-description button {
+    text-decoration: none;
+}
+
+.trash {
+    /* width: 30px; */
+    height: 30px;
+    cursor: pointer;
+}

@@ -1,0 +1,111 @@
+<app-header></app-header>
+
+<div class="container text-center my-4">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h2>Register</h2>
+    </section>
+</div>
+
+<div class="container">
+    <section class="hero-section d-flex justify-content-center">
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="border shadow-lg p-3 rounded">
+
+            <!-- Printing all the error! -->
+
+            <ngb-alert [dismissible]="false" *ngIf="error" class="error alert-danger">
+                <span><i class="fas fa-info-circle me-1 error"></i>{{errorMessage}}</span>
+            </ngb-alert>
+
+            <!-- Email -->
+            <ngb-alert [dismissible]="false" class="error alert-danger" *ngIf="email.touched && email?.hasError('email')">
+                <span><i class="fas fa-info-circle me-1"></i>Please enter a valid email address.</span>
+            </ngb-alert>
+
+            <!-- Name -->
+            <ngb-alert [dismissible]="false" class="error alert-danger" *ngIf="firstname.touched && firstname?.hasError('pattern')">
+                <span><i class="fas fa-info-circle me-1"></i>The firstname should only contain alphabets.</span>
+            </ngb-alert>
+            <ngb-alert [dismissible]="false" class="error  alert-danger" *ngIf="lastname.touched && lastname?.hasError('pattern')">
+                <span><i class="fas fa-info-circle me-1"></i>The lastname should only contain alphabets.</span>
+            </ngb-alert>
+
+            <!-- Password -->
+            <ngb-alert [dismissible]="false" class="error alert-danger" *ngIf="password.touched && password.hasError('pattern')">
+                <span><i class="fas fa-info-circle me-1"></i>Password should have at least 1 Capital
+                    character(s), <br> 1 small character(s), 1 numeric character(s), <br> and 1 special
+                    character(s).</span>
+            </ngb-alert>
+            <ngb-alert [dismissible]="false" class="error alert-danger" *ngIf="confirmPassword.touched && confirmPassword.hasError('mismatch')">
+                <span><i class="fas fa-info-circle me-1"></i>Password should be matched.</span>
+            </ngb-alert>
+
+            <h5 class="text-center my-3">Enter your details</h5>
+
+            <div class="row my-3">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" formControlName="email" class="form-control" />
+                        <span class="error" *ngIf="email?.hasError('required') && email?.touched">
+                            <i class="fas fa-info-circle me-1"></i>Email is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="firstname" formControlName="firstName" class="form-control" />
+                        <span class="error" *ngIf="firstname?.touched && firstname?.hasError('required')">
+                            <i class="fas fa-info-circle me-1"></i>First name is required.</span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" formControlName="lastName" class="form-control" />
+                        <span class="error" *ngIf="lastname?.touched && lastname?.hasError('required')">
+                            <i class="fas fa-info-circle me-1"></i>Last name is required.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" formControlName="password" class="form-control" />
+                        <span class="error" *ngIf="password?.touched && password?.hasError('required')">
+                            <i class="fas fa-info-circle me-1"></i>Password is required.</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" formControlName="confirmPassword" class="form-control" />
+                        <div class="error" *ngIf="confirmPassword?.touched">
+                            <span *ngIf="confirmPassword?.hasError('required')"><i class="fas fa-info-circle me-1"></i>Password is required.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning mt-3 w-100">Register</button>
+            </div>
+
+            <div class="row mt-3 p-2">
+                <div class="col-sm-12 text-center">
+                    <p>Already have an account? <a [routerLink]="['/login']" class="text-white">Login Here</a></p>
+                </div>
+            </div>
+        </form>
+
+    </section>
+</div>
+
+
+
+<router-outlet></router-outlet>
